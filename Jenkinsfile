@@ -1,1 +1,1 @@
-echo "dalga"
+echo "test new main"
