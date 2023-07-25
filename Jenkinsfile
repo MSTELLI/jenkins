@@ -1,1 +1,1 @@
-echo "MAfyaaa Suloooo"
+echo "Mafya Burak abim"
