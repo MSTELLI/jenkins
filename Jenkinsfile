@@ -4,8 +4,9 @@ pipeline {
         stage('Execute Python Script') {
             steps {
                 script {
-                    // Python dosyasını çalıştırmak için shell komutunu kullanın
-                    sh 'python pythonsulo.py'
+                    // Python dosyasını çalıştırma ve çıktıyı alıp Jenkins Console Output'a yazdırma
+                    def pythonOutput = sh(script: 'python pythonsulo.py', returnStdout: true).trim()
+                    echo "Python Output: ${pythonOutput}"
                 }
             }
         }
