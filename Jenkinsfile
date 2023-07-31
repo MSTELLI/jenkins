@@ -11,10 +11,14 @@ pipeline {
         stage('Upload Python File to GCS') {
             steps {
                 // Google Cloud SDK'nın yüklü olduğundan emin ol
-                sh 'gcloud version'
+                def gcpCredentials = credentials('new-service')
                 
-                // Python dosyasını GCS'ye yükle
-                sh "gsutil cp ${PYTHON_FILE_NAME} gs://${GCS_BUCKET}/${GCS_FOLDER}/${PYTHON_FILE_NAME}"
+                withCredentials([file(credentialsId: 'new-service', variable: 'GCP_CREDENTIALS_JSON')]) {
+                        // Google Cloud SDK'nın yüklü olduğundan emin ol
+                        sh 'gcloud version' 
+                        // Python dosyasını GCS'ye yükle
+                        sh "gcloud auth activate-service-account --key-file=${GCP_CREDENTIALS_JSON}"
+                        sh "gsutil cp ${PYTHON_FILE_NAME} gs://${GCS_BUCKET}/${GCS_FOLDER}/${PYTHON_FILE_NAME}"
             }
         }
     }
