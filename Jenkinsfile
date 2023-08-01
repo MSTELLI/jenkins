@@ -1,1 +1,1 @@
-echo "sa from jenkins"
+println 'Hello World!'
