@@ -8,14 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Install gsutil') {
-            steps {
-                // gsutil yüklemek için gcloud komutunu çağırın
-                script {
-                    sh "gcloud components install gsutil"
-                }
-            }
-        }
         
         stage('Upload to GCS') {
             steps {
