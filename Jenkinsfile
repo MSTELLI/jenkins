@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('hopi-big-data')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-connection')
         BUCKET_NAME = "hopi-test-bucket"
         FILE_NAME = "./dag/airflow_first_file.py"
     }
