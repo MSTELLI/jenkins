@@ -13,7 +13,7 @@ pipeline {
         stage('Upload to GCS') {
             steps {
                 script {
-                    sh "gsutil cp ${SOURCE_NAME} gs://${GCS_BUCKET}/${FILE_NAME}"
+                    sh "gsutil cp ${SOURCE_NAME} gs://${BUCKET_NAME}/${FILE_NAME}"
                 }
             }
         }
