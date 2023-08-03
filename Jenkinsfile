@@ -8,12 +8,21 @@ pipeline {
     }
 
     stages {
-        
         stage('Upload to GCS') {
             steps {
-                // Dosyayı GCS'ye yüklemek için gsutil komutunu kullanın
                 script {
-                    sh "gsutil cp ${FILE_NAME} gs://${BUCKET_NAME}/${FILE_NAME}"
+                    sh """
+                        python3 -m pip install google-cloud-storage
+                        python3 -c '
+                        import os
+                        from google.cloud import storage
+                        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "${GOOGLE_APPLICATION_CREDENTIALS}"
+                        client = storage.Client()
+                        bucket = client.bucket("${BUCKET_NAME}")
+                        blob = bucket.blob("${FILE_NAME}")
+                        blob.upload_from_filename("${FILE_NAME}")
+                        '
+                    """
                 }
             }
         }
