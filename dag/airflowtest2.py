@@ -14,4 +14,5 @@ with DAG(dag_id="hello from airflowtest2 new commit auto",
         task_id="hello_world",
         python_callable=helloWorld)
 
+
 task2
